@@ -145,6 +145,48 @@ Transfer-Encoding: chunked
     }
 }
 
+papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http :8080/v1/customers/active "accept: application/json"
+HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Date: Thu, 20 Dec 2018 23:42:25 GMT
+Transfer-Encoding: chunked
+
+{
+    "_embedded": {
+        "customers": [
+            {
+                "_links": {
+                    "customers": {
+                        "href": "http://localhost:8080/v1/customers"
+                    },
+                    "self": {
+                        "href": "http://localhost:8080/v1/customers/1"
+                    }
+                },
+                "name": "pas",
+                "status": "active"
+            },
+            {
+                "_links": {
+                    "customers": {
+                        "href": "http://localhost:8080/v1/customers"
+                    },
+                    "self": {
+                        "href": "http://localhost:8080/v1/customers/2"
+                    }
+                },
+                "name": "lucia",
+                "status": "active"
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/v1/customers"
+        }
+    }
+}
+
 papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http :8080/v1/customers/1
 HTTP/1.1 200
 Content-Type: application/hal+json;charset=UTF-8
@@ -188,6 +230,26 @@ papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http DELETE :8080/v1/custom
 HTTP/1.1 200
 Content-Length: 0
 Date: Thu, 20 Dec 2018 03:30:38 GMT
+
+papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http PUT :8080/v1/customers/1 < update-customer.json
+HTTP/1.1 201
+Content-Type: application/json;charset=UTF-8
+Date: Thu, 20 Dec 2018 23:08:48 GMT
+Location: http://localhost:8080/v1/customers/1
+Transfer-Encoding: chunked
+
+{
+    "_links": {
+        "customers": {
+            "href": "http://localhost:8080/v1/customers"
+        },
+        "self": {
+            "href": "http://localhost:8080/v1/customers/1"
+        }
+    },
+    "name": "passar",
+    "status": "active"
+}
 ```
 <hr size=2 />
 Pas Apicella [papicella at pivotal.io] is an Advisory Platform Architect at Pivotal APJ 

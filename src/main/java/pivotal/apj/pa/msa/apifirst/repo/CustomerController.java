@@ -51,6 +51,19 @@ public class CustomerController {
         return customerResourceAssembler.toResource(customer);
     }
 
+    @GetMapping(value = "/{status}", produces = "application/json")
+    @ApiOperation(value = "Return all customers with a given status", notes = "Retrieving a list of Customers by status")
+    public Resources<Resource<Customer>> findByCustomerStatus(@PathVariable String status) {
+
+        List<Resource<Customer>> employees = customerRepository.findByStatus(status).stream()
+                .map(customerResourceAssembler::toResource)
+                .collect(Collectors.toList());
+
+        return new Resources<>(employees,
+                linkTo(methodOn(CustomerController.class).customers()).withSelfRel());
+
+    }
+
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Delete a Single Customer", notes = "Delete a single customer by ID")
     ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
@@ -59,8 +72,31 @@ public class CustomerController {
     }
 
     @PostMapping()
+    @ApiOperation(value = "Add a new Customer", notes = "Add a new CustomerD")
     ResponseEntity<?> newCustomer(@RequestBody Customer newCustomer) throws URISyntaxException {
         Resource<Customer> resource = customerResourceAssembler.toResource(customerRepository.save(newCustomer));
+
+        return ResponseEntity
+                .created(new URI(resource.getId().expand().getHref()))
+                .body(resource);
+    }
+
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Replace a Single Customer", notes = "Replace a single customer by ID")
+    ResponseEntity<?> replaceCustomer(@RequestBody Customer newCustomer, @PathVariable Long id) throws URISyntaxException {
+
+        Customer updatedCustomer = customerRepository.findById(id)
+                .map(customer -> {
+                    customer.setName(newCustomer.getName());
+                    customer.setStatus(newCustomer.getStatus());
+                    return customerRepository.save(customer);
+                })
+                .orElseGet(() -> {
+                    newCustomer.setId(id);
+                    return customerRepository.save(newCustomer);
+                });
+
+        Resource<Customer> resource = customerResourceAssembler.toResource(updatedCustomer);
 
         return ResponseEntity
                 .created(new URI(resource.getId().expand().getHref()))
