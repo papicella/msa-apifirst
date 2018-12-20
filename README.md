@@ -15,7 +15,7 @@ applications:
     path: ./target/msa-apifirst-0.0.1-SNAPSHOT.jar
 ```
 
-- Build as follows
+- Build/Run locally as follows. Once done CNTRL-C to exit the running app 
 
 ```bash
 $ ./package-run.sh
