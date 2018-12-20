@@ -15,6 +15,12 @@ applications:
     path: ./target/msa-apifirst-0.0.1-SNAPSHOT.jar
 ```
 
+- Build as follows
+
+```bash
+$ ./package-run.sh
+```
+
 - Push as follows
 
 ```bash
