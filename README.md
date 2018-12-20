@@ -70,5 +70,67 @@ X-Vcap-Request-Id: 44be7076-5a06-40d4-603b-24f18af802d1
 
 ![alt tag](https://i.ibb.co/KNwZcSH/msa-apifirst-3.pngg)
 
+- When running locally using HTTPie 
+
+```json
+papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http :8080/v1/customers
+HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Date: Thu, 20 Dec 2018 03:23:24 GMT
+Transfer-Encoding: chunked
+
+[
+    {
+        "id": 1,
+        "name": "pas",
+        "status": "active"
+    },
+    {
+        "id": 2,
+        "name": "lucia",
+        "status": "active"
+    },
+    {
+        "id": 3,
+        "name": "lucas",
+        "status": "inactive"
+    },
+    {
+        "id": 4,
+        "name": "siena",
+        "status": "inactive"
+    }
+]
+
+papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http :8080/v1/customers/1
+HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Date: Thu, 20 Dec 2018 03:23:54 GMT
+Transfer-Encoding: chunked
+
+{
+    "id": 1,
+    "name": "pas",
+    "status": "active"
+}
+
+papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http POST :8080/v1/customers < customer.json
+HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Date: Thu, 20 Dec 2018 03:29:37 GMT
+Transfer-Encoding: chunked
+
+{
+    "id": 5,
+    "name": "fred",
+    "status": "active"
+}
+
+papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http DELETE :8080/v1/customers/5
+HTTP/1.1 200
+Content-Length: 0
+Date: Thu, 20 Dec 2018 03:30:38 GMT
+
+```
 <hr size=2 />
 Pas Apicella [papicella at pivotal.io] is an Advisory Platform Architect at Pivotal APJ 
