@@ -31,7 +31,7 @@ ACTUATOR ENDPOINTS: http://{ROUTE}/actuator
 
 - Actuator Health endpoint
 
-```
+```json
 papicella@papicella:~$ http http://customer-api-funny-reedbuck.cfapps.io/actuator/health
 HTTP/1.1 200 OK
 Connection: keep-alive
