@@ -82,52 +82,104 @@ X-Vcap-Request-Id: 44be7076-5a06-40d4-603b-24f18af802d1
 papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http :8080/v1/customers
 HTTP/1.1 200
 Content-Type: application/json;charset=UTF-8
-Date: Thu, 20 Dec 2018 03:23:24 GMT
-Transfer-Encoding: chunked
-
-[
-    {
-        "id": 1,
-        "name": "pas",
-        "status": "active"
-    },
-    {
-        "id": 2,
-        "name": "lucia",
-        "status": "active"
-    },
-    {
-        "id": 3,
-        "name": "lucas",
-        "status": "inactive"
-    },
-    {
-        "id": 4,
-        "name": "siena",
-        "status": "inactive"
-    }
-]
-
-papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http :8080/v1/customers/1
-HTTP/1.1 200
-Content-Type: application/json;charset=UTF-8
-Date: Thu, 20 Dec 2018 03:23:54 GMT
+Date: Thu, 20 Dec 2018 04:20:56 GMT
 Transfer-Encoding: chunked
 
 {
-    "id": 1,
+    "_embedded": {
+        "customers": [
+            {
+                "_links": {
+                    "customers": {
+                        "href": "http://localhost:8080/v1/customers"
+                    },
+                    "self": {
+                        "href": "http://localhost:8080/v1/customers/1"
+                    }
+                },
+                "name": "pas",
+                "status": "active"
+            },
+            {
+                "_links": {
+                    "customers": {
+                        "href": "http://localhost:8080/v1/customers"
+                    },
+                    "self": {
+                        "href": "http://localhost:8080/v1/customers/2"
+                    }
+                },
+                "name": "lucia",
+                "status": "active"
+            },
+            {
+                "_links": {
+                    "customers": {
+                        "href": "http://localhost:8080/v1/customers"
+                    },
+                    "self": {
+                        "href": "http://localhost:8080/v1/customers/3"
+                    }
+                },
+                "name": "lucas",
+                "status": "inactive"
+            },
+            {
+                "_links": {
+                    "customers": {
+                        "href": "http://localhost:8080/v1/customers"
+                    },
+                    "self": {
+                        "href": "http://localhost:8080/v1/customers/4"
+                    }
+                },
+                "name": "siena",
+                "status": "inactive"
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/v1/customers"
+        }
+    }
+}
+
+papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http :8080/v1/customers/1
+HTTP/1.1 200
+Content-Type: application/hal+json;charset=UTF-8
+Date: Thu, 20 Dec 2018 04:20:06 GMT
+Transfer-Encoding: chunked
+
+{
+    "_links": {
+        "customers": {
+            "href": "http://localhost:8080/v1/customers"
+        },
+        "self": {
+            "href": "http://localhost:8080/v1/customers/1"
+        }
+    },
     "name": "pas",
     "status": "active"
 }
 
 papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http POST :8080/v1/customers < customer.json
-HTTP/1.1 200
+HTTP/1.1 201
 Content-Type: application/json;charset=UTF-8
-Date: Thu, 20 Dec 2018 03:29:37 GMT
+Date: Thu, 20 Dec 2018 04:19:41 GMT
+Location: http://localhost:8080/v1/customers/5
 Transfer-Encoding: chunked
 
 {
-    "id": 5,
+    "_links": {
+        "customers": {
+            "href": "http://localhost:8080/v1/customers"
+        },
+        "self": {
+            "href": "http://localhost:8080/v1/customers/5"
+        }
+    },
     "name": "fred",
     "status": "active"
 }
@@ -136,7 +188,6 @@ papicella@papicella:~/piv-projects/MSA/msa-apifirst$ http DELETE :8080/v1/custom
 HTTP/1.1 200
 Content-Length: 0
 Date: Thu, 20 Dec 2018 03:30:38 GMT
-
 ```
 <hr size=2 />
 Pas Apicella [papicella at pivotal.io] is an Advisory Platform Architect at Pivotal APJ 
