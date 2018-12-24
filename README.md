@@ -30,8 +30,8 @@ $ cf push
 - Once deployed access SWAGGER UI and other endpoints as shown below
 
 ```
-SWAGGER: http://{ROUTE}/swagger-ui.html</li>
-API DOCS: http://{ROUTE}/v2/api-docs</li>
+SWAGGER: http://{ROUTE}/swagger-ui.html
+API DOCS: http://{ROUTE}/v2/api-docs
 ACTUATOR ENDPOINTS: http://{ROUTE}/actuator
 ```
 
