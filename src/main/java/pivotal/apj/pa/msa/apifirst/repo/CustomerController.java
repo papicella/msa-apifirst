@@ -32,11 +32,11 @@ public class CustomerController {
     @ApiOperation(value = "Return all customers", notes = "Retrieving a list of Customers")
     public Resources<Resource<Customer>> customers() {
 
-        List<Resource<Customer>> employees = customerRepository.findAll().stream()
+        List<Resource<Customer>> customers = customerRepository.findAll().stream()
                 .map(customerResourceAssembler::toResource)
                 .collect(Collectors.toList());
 
-        return new Resources<>(employees,
+        return new Resources<>(customers,
                 linkTo(methodOn(CustomerController.class).customers()).withSelfRel());
 
     }
@@ -55,11 +55,11 @@ public class CustomerController {
     @ApiOperation(value = "Return all customers with a given status", notes = "Retrieving a list of Customers by status")
     public Resources<Resource<Customer>> findByCustomerStatus(@PathVariable String status) {
 
-        List<Resource<Customer>> employees = customerRepository.findByStatus(status).stream()
+        List<Resource<Customer>> customers = customerRepository.findByStatus(status).stream()
                 .map(customerResourceAssembler::toResource)
                 .collect(Collectors.toList());
 
-        return new Resources<>(employees,
+        return new Resources<>(customers,
                 linkTo(methodOn(CustomerController.class).customers()).withSelfRel());
 
     }
