@@ -19,7 +19,6 @@ class LoadDatabase {
             log.info("Preloading " + repository.save(new Customer("lucia", "active")));
             log.info("Preloading " + repository.save(new Customer("lucas", "inactive")));
             log.info("Preloading " + repository.save(new Customer("siena", "inactive")));
-            log.info("Preloading " + repository.save(new Customer("dbs", "active")));
         };
     }
 }
